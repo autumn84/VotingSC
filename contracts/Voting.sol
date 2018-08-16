@@ -26,7 +26,8 @@ contract Voting {
 
   function voteForCandidate(bytes32 candidate) {
     require(validCandidate(candidate));
-    votesReceived[candidate] += 1;
+    //TODO: get the specific token balance
+    votesReceived[candidate] += balance;
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {
