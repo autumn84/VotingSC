@@ -19,44 +19,22 @@ pragma experimental "v0.5.0";
 pragma experimental "ABIEncoderV2";
 
 
-/// @title ERC20 Token Interface
-/// @dev see https://github.com/ethereum/EIPs/issues/20
+/// @title Utility Functions for address
 /// @author autumn84 - <yangli@loopring.org>
-contract ERC20 {
-    function balanceOf(
-        address who
+library AddressUtil {
+    function isContract(
+        address addr
         )
+        public
         view
-        public
-        returns (uint256);
-
-    function allowance(
-        address owner,
-        address spender
-        )
-        view
-        public
-        returns (uint256);
-
-    function transfer(
-        address to,
-        uint256 value
-        )
-        public
-        returns (bool);
-
-    function transferFrom(
-        address from,
-        address to,
-        uint256 value
-        )
-        public
-        returns (bool);
-
-    function approve(
-        address spender,
-        uint256 value
-        )
-        public
-        returns (bool);
+        returns (bool)
+    {
+        if (addr == 0x0) {
+            return false;
+        } else {
+            uint size;
+            assembly { size := extcodesize(addr) }
+            return size > 0;
+        }
+    }
 }
